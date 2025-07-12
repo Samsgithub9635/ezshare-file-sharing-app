@@ -74,6 +74,28 @@
                     Discover a new way of sharing files with convenience and security. Join us and start sharing smarter
                     today!</p>
                 <button class="login-btn">Login</button>
+
+                <!-- Register prompt -->
+                <p class="register-line">
+                    Don’t have an account?
+                    <span class="signup-btn" onclick="showSignupForm()">Sign Up</span>
+                </p>
+
+                <!-- Hidden Signup Form -->
+                <div id="signup-form" class="signup-form">
+                    <h3>Create Account</h3>
+
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" placeholder="Enter username" required>
+
+                    <label for="new-email">Email</label>
+                    <input type="email" id="new-email" placeholder="Enter email" required>
+
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" placeholder="Create password" required>
+
+                    <button type="submit">Register</button>
+                </div>
             </div>
             <div class="card-back">
                 <form>
