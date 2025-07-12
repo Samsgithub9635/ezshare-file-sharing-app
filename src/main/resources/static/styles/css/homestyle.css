@@ -323,16 +323,18 @@ button[type="submit"] {
 }
 
 .social a {
-    margin: 0 5px;
-    cursor: pointer;
-    width: 150px;
-    border-radius: 3px;
-    /*padding: 5px 10px 10px 5px;*/
-    padding: 10px;
-    background-color: rgba(255,255,255,0.27);
+    width: 80%;
+    max-width: 250px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.27);
     color: #eaf0fb;
     text-decoration: none;
-    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .social .go {
@@ -354,8 +356,24 @@ button[type="submit"] {
     background-color: rgba(255, 255, 255, 0.47);
 }
 
-.about-btn{
-    margin:10px;
+.about-btn {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
     cursor: pointer;
-    float: right;
+    width: 100%;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.about-btn:hover {
+    color: #88b8f7; /* light blue */
+    transform: scale(1.08);
+}
+
+.about-btn:active {
+    transform: scale(0.95);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
