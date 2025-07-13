@@ -156,11 +156,11 @@ input[type="text"] {
 .back-link {
     display: inline-block;
     margin-top: 20px;
-    color: #6200ea;
+    color: #ea005a;
     text-decoration: none;
     font-weight: bold;
 }
 
 .back-link:hover {
-    color: #3700b3;
+    color: #ff00dd;
 }
