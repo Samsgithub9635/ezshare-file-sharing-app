@@ -1,4 +1,4 @@
-# EZShare – Lightning-Fast File Sharing WebApp 🚀
+# EZShare – Lightning-Fast File Sharing WebApp 🗃️
 
 EZShare is a lightweight, secure, and high-speed file sharing web application built using **Spring Boot**, **Thymeleaf**, **JavaScript**, **HTML**, and **CSS**. Designed for simplicity and performance, EZShare enables users to share files up to **100MB** in size with just **2 clicks**, delivering them in under **3 seconds**.
 
