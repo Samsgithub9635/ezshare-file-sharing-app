@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller //controller returns html file as per returned 
 @RequestMapping() // added files as the end point for controller
 public class filecontroller {
-    @GetMapping("/files")
+    @GetMapping("/home")
     public String login() {
         return "home"; //return home.html
     }
 
-    @GetMapping("/list")
+    @GetMapping("/files")
     public String files() {
         return "list-files"; //return list-files.html
     }
