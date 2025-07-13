@@ -21,9 +21,9 @@
     <div class="container">
         <div class="box download-box">
             <h1>Download Your File</h1>
-            <p>File Name: <span th:text="${file.fileName}"></span></p>
-            <p>Uploaded By: <span th:text="${file.uploadedBy}"></span></p>
-            <form th:action="@{/files/download/{id}(id=${file.id})}">
+            <p>File Name: <span ></span></p>
+            <p>Uploaded By: <span ></span></p>
+            <form >
                 <button type="submit" class="download-button">
                     <i class="fas fa-download"></i> Download File
                 </button>
@@ -32,7 +32,7 @@
 
         <div class="box share-box">
             <h2>Share This Page</h2>
-            <p>URL: <input type="text" id="shareUrl" th:value="${shareUrl}" readonly /></p>
+            <p>URL: <input type="text" id="shareUrl"  readonly /></p>
             <button class="copy-button" onclick="copyToClipboard()">
                 <i class="fas fa-copy"></i> Copy URL
             </button>
