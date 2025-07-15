@@ -2,13 +2,20 @@ package com.ezshare.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ezshare.service.FileService;
+
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
 
 
 
@@ -25,8 +32,15 @@ public class Filecontroller {
         model.addAttribute("files", fileService.getAll());
         return new String();
     }
+
+    @PostMapping("/upload")
+    public String postMethodName(@RequestParam("file") MultipartFile file, @RequestParam("uploadedby") String uploadedBy) throws IOException {
+        fileService.uploadFile(file, uploadedBy);
+        return "redirect:/"; // redirect to this page again
+    }
     
-    @GetMapping("/home")
+    
+    @GetMapping("/login")
     public String login() {
         return "home"; //return home.html
     }
