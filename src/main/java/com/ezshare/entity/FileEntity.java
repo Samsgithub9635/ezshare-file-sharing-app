@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 public class FileEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,7 +23,7 @@ public class FileEntity {
     private LocalDateTime expiryTime;
 
     @Lob
-    @Column(name="file_data", columnDefinition = "LONGLOB")
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] fileData;
 
 }
