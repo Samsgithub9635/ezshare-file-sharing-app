@@ -31,7 +31,7 @@
         <!-- Upload Form -->
         <div class="upload-container">
             <h2 class="upload-title">Upload Your File</h2>
-            <form action="#" method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+            <form th:action="@{/upload}" method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                 <div class="drag-drop-area" id="dragDropArea">
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
                     <p>Drag & Drop your file here or</p>
@@ -41,7 +41,7 @@
                 <span id="file-name" class="file-name">No file chosen</span>
 
                 <div class="input-group creative-input-group">
-                    <input type="text" name="uploadedBy" id="uploadedBy" class="text-input" required />
+                    <input type="text" name="uploadedby" id="uploadedBy" class="text-input" required />
                     <label for="uploadedBy" class="input-label">Uploaded By</label>
                     <i class="fas fa-user input-icon"></i>
                 </div>
@@ -63,32 +63,19 @@
                             <th>Delete File</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>example.pdf</td>
-                            <td>Samrat</td>
+                    <tbody id="fileTableBody">
+                        <tr th:each="file : ${files}">
+                            <td th:text="${file.fileName}">File Name</td>
+                            <td th:text="${file.uploadedBy}">Uploaded By</td>
                             <td>
-                                <button class="share-button" onclick="copyToClipboard('https://ezshare.app/file/123')">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <form action="#" method="post" onsubmit="return confirm('Delete this file?');">
-                                    <button type="submit" class="delete-button"><i
-                                            class="fas fa-trash-alt"></i></button>
+                                <!-- Share Form -->
+                                <form th:action="@{/files/share/{id}(id=${file.id})}">
+                                    <button type="submit" class="share-button"><i class="fas fa-share-alt"></i></button>
                                 </form>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>design.zip</td>
-                            <td>EZUser</td>
                             <td>
-                                <button class="share-button" onclick="copyToClipboard('https://ezshare.app/file/456')">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <form action="#" method="post" onsubmit="return confirm('Delete this file?');">
+                                <form th:action="@{/files/delete/{id}(id=${file.id})}" method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete this file?');">
                                     <button type="submit" class="delete-button"><i
                                             class="fas fa-trash-alt"></i></button>
                                 </form>
@@ -97,6 +84,7 @@
                     </tbody>
                 </table>
             </div>
+            <div class="scroll-indicator" th:if="${files.size() > 4}">Scroll to see more files</div>
         </div>
     </div>
 
