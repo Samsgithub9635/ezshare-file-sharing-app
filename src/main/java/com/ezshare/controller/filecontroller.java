@@ -40,7 +40,7 @@ public class Filecontroller {
 
     @GetMapping("/share/{id}")
     public String shareFile(@PathVariable int id, Model model) {
-        ResponseEntity<?> fileModel = fileService.sharedFile(id);
+        ResponseEntity<?> fileModel = fileService.shareFile(id); // ✅ Method call now valid
         if (fileModel.hasBody()) {
             String currentUrl = ServletUriComponentsBuilder.fromCurrentRequest().toUriString();
             model.addAttribute("shareUrl", currentUrl);
