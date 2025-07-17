@@ -9,8 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ezshare.model.FileModel;
 
 public interface FileService {
-    public List<FileModel> getAll();
-    public ResponseEntity<?> uploadFile(MultipartFile file, String uploadedby) throws IOException;
-    public ResponseEntity<?> sharedFile(int id);
+
+    public ResponseEntity<?> uploadFile(MultipartFile file, String uploadedBy) throws IOException;
+
     public ResponseEntity<?> deleteFile(int id);
+
+    public ResponseEntity<?> shareFile(int id); // ✅ Renamed method
+
+    public List<FileModel> getAll();
 }
