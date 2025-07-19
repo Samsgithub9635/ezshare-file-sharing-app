@@ -28,14 +28,14 @@ public class Filecontroller {
     @GetMapping("/home")
     public String index(Model model) {
         model.addAttribute("files", fileService.getAll());
-        return "home";
+        return "list-files";
     }
 
     @PostMapping("/upload")
-    public String postMethodName(@RequestParam("file") MultipartFile file,
+    public String upload(@RequestParam("file") MultipartFile file,
             @RequestParam("uploadedby") String uploadedBy) throws IOException {
         fileService.uploadFile(file, uploadedBy);
-        return "redirect:/files/home"; // redirect to this page again
+        return "redirect:/files/home";
     }
 
     @GetMapping("/share/{id}")
