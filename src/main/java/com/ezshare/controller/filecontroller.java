@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller // controller returns html file as per returned
-@RequestMapping() // added files as the end point for controller
+@RequestMapping("/files") // added files as the end point for controller
 public class Filecontroller {
 
     @Autowired
     private FileService fileService;
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String index(Model model) {
         model.addAttribute("files", fileService.getAll());
         return "home";
@@ -35,7 +35,7 @@ public class Filecontroller {
     public String postMethodName(@RequestParam("file") MultipartFile file,
             @RequestParam("uploadedby") String uploadedBy) throws IOException {
         fileService.uploadFile(file, uploadedBy);
-        return "redirect:/"; // redirect to this page again
+        return "redirect:/files/home"; // redirect to this page again
     }
 
     @GetMapping("/share/{id}")
@@ -47,7 +47,7 @@ public class Filecontroller {
             model.addAttribute("file", fileModel.getBody());
             return "share-file";
         } else {
-            return "redirect:/";
+            return "redirect:/files/home";
         }
     }
 
@@ -61,9 +61,9 @@ public class Filecontroller {
         return "home"; // return home.html
     }
 
-    @GetMapping("/files")
+    @GetMapping("/share")
     public String files() {
-        return "list-files"; // return list-files.html
+        return "share-file"; // return list-files.html
     }
 
 }
