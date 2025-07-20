@@ -1,22 +1,16 @@
 package com.ezshare.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.ezshare.service.FileService;
-
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.IOException;
 
 @Controller // controller returns html file as per returned
 @RequestMapping("/files") // added files as the end point for controller
@@ -33,8 +27,14 @@ public class Filecontroller {
 
     @PostMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile file,
-            @RequestParam("uploadedby") String uploadedBy) throws IOException {
-        fileService.uploadFile(file, uploadedBy);
+            @RequestParam("uploadedby") String uploadedBy,
+            RedirectAttributes redirectAttributes) {
+        try {
+            fileService.uploadFile(file, uploadedBy);
+            redirectAttributes.addFlashAttribute("message", "✅ File uploaded successfully.");
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("error", "❌ Upload failed: " + e.getMessage());
+        }
         return "redirect:/files/home";
     }
 
@@ -52,18 +52,28 @@ public class Filecontroller {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteFile(@PathVariable int id) {
-        return fileService.deleteFile(id);
+    public String deleteFile(@PathVariable int id) {
+        ResponseEntity<?> file = fileService.deleteFile(id);
+        if (file.hasBody()) {
+            return "redirect:/files/home";
+        }
+        return "redirect:/files/home";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/download/{id}")
+    public ResponseEntity<?> downloadFile(@PathVariable("id") int id) {
+        return fileService.getFile(id);
+    }
+    
+
+    @GetMapping()
     public String login() {
         return "home"; // return home.html
     }
 
-    @GetMapping("/share")
-    public String files() {
-        return "share-file"; // return list-files.html
-    }
+//    @GetMapping("/share")
+//    public String files() {
+//        return "share-file"; // return list-files.html
+//    }
 
 }
