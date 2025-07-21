@@ -1,9 +1,12 @@
 package com.ezshare.model;
 
+import lombok.Data;
 import java.time.LocalDateTime;
 
-import lombok.Data;
-
+/**
+ * Data Transfer Object (DTO) for files.
+ * Used for view and controller responses, decoupled from persistence.
+ */
 @Data
 public class FileModel {
     private int id;
@@ -11,5 +14,13 @@ public class FileModel {
     private String uploadedBy;
     private LocalDateTime uploadTime;
     private LocalDateTime expiryTime;
-    private byte[] fileData;
+    private byte[] fileData; // Null for list/share; included for download endpoint only.
+    public boolean hasBody() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hasBody'");
+    }
+    public Object getBody() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBody'");
+    }
 }

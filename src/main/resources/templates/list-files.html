@@ -9,11 +9,9 @@
 
     <!-- ✅ Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <!-- ✅ Font Awesome (Latest Kit) -->
+    <!-- ✅ Font Awesome -->
     <script src="https://kit.fontawesome.com/dd5f4a2f8c.js" crossorigin="anonymous"></script>
-
-    <!-- ✅ Local CSS (served via Spring Boot's static resources) -->
+    <!-- ✅ Local CSS -->
     <link rel="stylesheet" th:href="@{/styles/css/list-files.css}">
 </head>
 
@@ -31,6 +29,11 @@
         <!-- Upload Form -->
         <div class="upload-container">
             <h2 class="upload-title">Upload Your File</h2>
+
+            <!-- ✅ Feedback Messages -->
+            <p class="success-message" th:if="${message}" th:text="${message}"></p>
+            <p class="error-message" th:if="${error}" th:text="${error}"></p>
+
             <form th:action="@{/files/upload}" method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                 <div class="drag-drop-area" id="dragDropArea">
                     <i class="fas fa-cloud-upload-alt upload-icon"></i>
@@ -68,16 +71,14 @@
                             <td th:text="${file.fileName}">File Name</td>
                             <td th:text="${file.uploadedBy}">Uploaded By</td>
                             <td>
-                                <!-- Share Form -->
                                 <form th:action="@{/files/share/{id}(id=${file.id})}">
                                     <button type="submit" class="share-button"><i class="fas fa-share-alt"></i></button>
                                 </form>
                             </td>
                             <td>
                                 <form th:action="@{/files/delete/{id}(id=${file.id})}" method="post"
-                                    onsubmit="return confirm('Are you sure you want to delete this file?');">
-                                    <button type="submit" class="delete-button"><i
-                                            class="fas fa-trash-alt"></i></button>
+                                      onsubmit="return confirm('Are you sure you want to delete this file?');">
+                                    <button type="submit" class="delete-button"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
